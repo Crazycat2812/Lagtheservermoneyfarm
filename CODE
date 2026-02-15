@@ -5,7 +5,6 @@ local TARGET_POSITION = Vector3.new(164.7, -42.2, 526)
 
 local enabled = false
 
--- Create GUI
 local gui = Instance.new("ScreenGui")
 gui.Name = "TeleportToggleGUI"
 gui.ResetOnSpawn = false
@@ -13,19 +12,18 @@ gui.Parent = player:WaitForChild("PlayerGui")
 
 local button = Instance.new("TextButton")
 button.Size = UDim2.new(0,150,0,50)
-button.Position = UDim2.new(1,-160,1,-60) -- bottom right
+button.Position = UDim2.new(1,-160,1,-60) 
 button.AnchorPoint = Vector2.new(0,0)
 button.TextScaled = true
 button.Parent = gui
 
--- Update function
 local function updateButton()
     if enabled then
         button.Text = "ON"
-        button.BackgroundColor3 = Color3.fromRGB(50,200,50) -- green
+        button.BackgroundColor3 = Color3.fromRGB(50,200,50) 
     else
         button.Text = "OFF"
-        button.BackgroundColor3 = Color3.fromRGB(200,50,50) -- red
+        button.BackgroundColor3 = Color3.fromRGB(200,50,50) 
     end
 end
 
@@ -36,12 +34,11 @@ button.MouseButton1Click:Connect(function()
     updateButton()
 end)
 
--- Teleport loop
 task.spawn(function()
     while true do
         if enabled and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
             player.Character.HumanoidRootPart.CFrame = CFrame.new(TARGET_POSITION)
         end
-        task.wait(0.1)
+        task.wait(0.01)
     end
 end)
